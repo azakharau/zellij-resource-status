@@ -1,0 +1,23 @@
+[package]
+name = "zellij-resource-status"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Zellij companion plugin that publishes CPU and memory status to zjstatus"
+repository = "https://github.com/azakharau/zellij-resource-status"
+
+[lib]
+crate-type = ["rlib"]
+
+[[bin]]
+name = "zellij-resource-status"
+path = "src/main.rs"
+
+[dependencies]
+zellij-tile = "0.44.3"
+
+[profile.release]
+lto = true
+opt-level = "z"
+codegen-units = 1
+strip = true

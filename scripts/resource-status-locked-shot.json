@@ -1,0 +1,36 @@
+{
+  "id": "resource-status-locked",
+  "runtime": "zellij",
+  "viewport": { "cols": 160, "rows": 40 },
+  "timeouts": {
+    "launch_seconds": 20,
+    "step_seconds": 20,
+    "total_seconds": 90
+  },
+  "plugin": {
+    "no_build": true
+  },
+  "launch": {
+    "floating": true,
+    "skip_plugin_cache": true
+  },
+  "steps": [
+    {
+      "action": "wait_for_text",
+      "target": "plugin",
+      "pattern": "[0-9]+% .*[0-9]+\\.[0-9]+/[0-9]+\\.[0-9]+G",
+      "regex": true,
+      "timeout_seconds": 25
+    },
+    { "action": "capture", "id": "locked", "target": "plugin" },
+    { "action": "send_keys", "keys": ["Ctrl-Space"] },
+    {
+      "action": "wait_for_text",
+      "target": "plugin",
+      "pattern": "[0-9]+% .*[0-9]+\\.[0-9]+/[0-9]+\\.[0-9]+G",
+      "regex": true,
+      "timeout_seconds": 10
+    },
+    { "action": "capture", "id": "normal", "target": "plugin" }
+  ]
+}
